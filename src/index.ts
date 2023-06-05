@@ -1,14 +1,18 @@
-import * as express from "express"
-import * as bodyParser from "body-parser"
 import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
-import * as cors from "cors"
+import cors from "cors";
+import bodyParser from "body-parser";
+import express from 'express';
 AppDataSource.initialize().then(async () => {
 
     // create express app
     const app = express()
-    app.use(cors())
+    app.use(cors({
+        origin: "http://localhost:3000",
+        optionsSuccessStatus: 200
+    }))
+    
     app.use(bodyParser.json())
 
     // register express routes from defined application routes
