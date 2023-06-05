@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { RegistroDE } from "../../RegistroDE/entities/RegistroDE"
 
 @Entity()
 export class User {
@@ -15,4 +16,6 @@ export class User {
     @Column()
     password: string
 
+    @OneToMany( () =>  RegistroDE, (registroDE) => registroDE.user)
+    diarioDE: RegistroDE[]
 }
