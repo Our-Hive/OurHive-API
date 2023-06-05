@@ -7,6 +7,16 @@ import { User } from "../entities/User"
 export class UserService {
     private userRepository = AppDataSource.getRepository(User)
 
+    async findByEmail(email: string) {
+        const user = await this.userRepository.findOne({
+            where: {
+                email
+            }
+        })
+
+        return user
+    }
+
     async all() {
         return this.userRepository.find()
     }
