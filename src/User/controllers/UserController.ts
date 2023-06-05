@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express"
-import { User } from "../entities/User"
-import { AppDataSource } from "../../data-source"
 import { UserService } from "../services/UserService"
 import { CreateUserDto } from "../dtos/CreateUserDto"
 import { UpdateUserDto } from "../dtos/UpdateUserDto"

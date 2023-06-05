@@ -1,3 +1,4 @@
+import { hash } from "bcrypt"
 import { AppDataSource } from "../../data-source"
 import { CreateUserDto } from "../dtos/CreateUserDto"
 import { UpdateUserDto } from "../dtos/UpdateUserDto"
@@ -19,6 +20,9 @@ export class UserService {
     }
 
     async save(userDto: CreateUserDto) {
+        const hashedPassword = await hash(userDto.password, 10);
+        userDto.password = hashedPassword;
+
         const user = Object.assign(new User(), {
             username: userDto.username,
             email: userDto.email,
@@ -36,6 +40,11 @@ export class UserService {
 
     async update(id: number, updateDto: UpdateUserDto) {
         const user: User = await this.one(id)
+
+        if (updateDto.password) {
+            const hashedPassword = await hash(updateDto.password, 10);
+            updateDto.password = hashedPassword;
+        }
 
         const updateUser = Object.assign(user, updateDto)
 
