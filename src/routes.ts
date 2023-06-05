@@ -1,3 +1,4 @@
+import { AuthController } from "./Auth/controllers/AuthController";
 import { RegistroController } from "./RegistroDE/controllers/RegistroDEcontroller";
 import { UserController } from "./User/controllers/UserController";
 
@@ -51,4 +52,9 @@ export const Routes = [{
     route: "/recordDE/:id",
     controller: RegistroController,
     action: "update"
+}, {
+    method: "post",
+    route: "/auth/login",
+    controller: AuthController,
+    action: "login"
 }]
