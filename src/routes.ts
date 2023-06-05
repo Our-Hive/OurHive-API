@@ -1,3 +1,4 @@
+import { RegistroController } from "./RegistroDE/controllers/RegistroDEcontroller";
 import { UserController } from "./User/controllers/UserController";
 
 export const Routes = [{
@@ -24,5 +25,30 @@ export const Routes = [{
     method: "patch",
     route: "/users/:id",
     controller: UserController,
+    action: "update"
+}, {
+    method: "get",
+    route: "/recordDE",
+    controller: RegistroController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/recordDE/:id",
+    controller: RegistroController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/recordDE",
+    controller: RegistroController,
+    action: "save"
+}, {
+    method: "delete",
+    route: "/recordDE/:id",
+    controller: RegistroController,
+    action: "remove"
+}, {
+    method: "patch",
+    route: "/recordDE/:id",
+    controller: RegistroController,
     action: "update"
 }]
