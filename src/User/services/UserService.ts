@@ -3,9 +3,11 @@ import { AppDataSource } from "../../data-source"
 import { CreateUserDto } from "../dtos/CreateUserDto"
 import { UpdateUserDto } from "../dtos/UpdateUserDto"
 import { User } from "../entities/User"
+import { RegistroDE } from "../../RegistroDE/entities/RegistroDE"
 
 export class UserService {
     private userRepository = AppDataSource.getRepository(User)
+    private regisRepository = AppDataSource.getRepository(RegistroDE)
 
     async findByEmail(email: string) {
         const user = await this.userRepository.findOne({
@@ -55,5 +57,16 @@ export class UserService {
         const updateUser = Object.assign(user, updateDto)
 
         return await this.userRepository.save(updateUser)
+    }
+    
+    async getRegistersByUserId (id: number){
+        const records = await this.regisRepository.find ({
+            where: {
+                user: {
+                    id: id
+                }
+            }
+        })
+        return records
     }
 }

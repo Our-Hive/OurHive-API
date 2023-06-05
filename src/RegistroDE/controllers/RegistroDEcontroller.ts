@@ -41,4 +41,6 @@ export class RegistroController{
 
         return await this.recordService.update(id, updaterecordDto)
     }
+
+    
 }

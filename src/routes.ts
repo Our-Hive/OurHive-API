@@ -29,6 +29,11 @@ export const Routes = [{
     action: "update"
 }, {
     method: "get",
+    route: "/users/:id/registers",
+    controller: UserController,
+    action: "findRegistersByUserId"
+},{
+    method: "get",
     route: "/recordDE",
     controller: RegistroController,
     action: "all"

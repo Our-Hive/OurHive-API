@@ -43,4 +43,12 @@ export class UserController {
         return await this.userService.update(id, userDto)
     }
 
+    async findRegistersByUserId(request: Request, response: Response, next: NextFunction){
+        const id = parseInt(request.params.id)
+        
+        const registers = await this.userService.getRegistersByUserId(id)
+        
+        return registers
+    }
+
 }
