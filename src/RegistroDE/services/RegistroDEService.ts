@@ -1,3 +1,5 @@
+
+import { UserService } from "../../User/services/UserService";
 import { AppDataSource } from "../../data-source";
 import { CreateRegistroDto } from "../dtos/createRegistroDE_Dto";
 import { UpdateRegistroDTO } from "../dtos/updateRegistroDE_Dto";
@@ -6,7 +8,7 @@ import { RegistroDE } from "../entities/RegistroDE";
 
 export class RegistroDEService{
     private regisRepository = AppDataSource.getRepository(RegistroDE)
-
+    private userService = new UserService()
     async all(){
         return this.regisRepository.find()
     }
@@ -19,15 +21,11 @@ export class RegistroDEService{
     }
 
     async save (registroDTO: CreateRegistroDto){
+        const user = await this.userService.one(registroDTO.userid)
+        const record = Object.assign(new RegistroDE(), registroDTO)
 
-        const record = Object.assign( new RegistroDE(),{
-            title: registroDTO.title,
-            description: registroDTO.description,
-            emotion: registroDTO.emotion,
-            fecha: registroDTO.fecha,
-            userid: registroDTO.userid
-        })
-
+        record.user = user
+        
         return this.regisRepository.save(record)
     }
 
