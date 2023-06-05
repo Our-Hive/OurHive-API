@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
 import { RegistroDE } from "../../RegistroDE/entities/RegistroDE"
+import { RegistroEO } from "../../RegistroEO/entities/RegistroEO"
 
 @Entity()
 export class User {
@@ -21,4 +22,7 @@ export class User {
 
     @OneToMany( () =>  RegistroDE, (registroDE) => registroDE.user)
     diarioDE: RegistroDE[]
+
+    @OneToMany( ()=> RegistroEO, (registroEO) => registroEO.user)
+    OccasionalEmotion: RegistroEO[]
 }
