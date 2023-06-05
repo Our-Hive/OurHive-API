@@ -50,5 +50,13 @@ export class UserController {
         
         return registers
     }
+    
+    async findRecordEmotionByUserId(request: Request, response: Response, next: NextFunction){
+        const id = parseInt(request.params.id)
+        
+        const registers = await this.userService.getRecordEmotionByUserId(id)
+        
+        return registers
+    }
 
 }

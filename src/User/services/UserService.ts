@@ -4,10 +4,12 @@ import { CreateUserDto } from "../dtos/CreateUserDto"
 import { UpdateUserDto } from "../dtos/UpdateUserDto"
 import { User } from "../entities/User"
 import { RegistroDE } from "../../RegistroDE/entities/RegistroDE"
+import { RegistroEO } from "../../RegistroEO/entities/RegistroEO"
 
 export class UserService {
     private userRepository = AppDataSource.getRepository(User)
     private regisRepository = AppDataSource.getRepository(RegistroDE)
+    private recordEORepository = AppDataSource.getRepository(RegistroEO)
 
     async findByEmail(email: string) {
         const user = await this.userRepository.findOne({
@@ -61,6 +63,17 @@ export class UserService {
     
     async getRegistersByUserId (id: number){
         const records = await this.regisRepository.find ({
+            where: {
+                user: {
+                    id: id
+                }
+            }
+        })
+        return records
+    }
+
+    async getRecordEmotionByUserId (id: number){
+        const records = await this.recordEORepository.find ({
             where: {
                 user: {
                     id: id
