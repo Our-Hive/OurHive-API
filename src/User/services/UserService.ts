@@ -23,11 +23,7 @@ export class UserService {
         const hashedPassword = await hash(userDto.password, 10);
         userDto.password = hashedPassword;
 
-        const user = Object.assign(new User(), {
-            username: userDto.username,
-            email: userDto.email,
-            password: userDto.password,
-        })
+        const user = Object.assign(new User(), userDto)
 
         return this.userRepository.save(user)
     }
