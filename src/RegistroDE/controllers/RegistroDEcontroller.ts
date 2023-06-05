@@ -17,7 +17,7 @@ export class RegistroController{
 
         if (!recordDE) {
             response.status(404).json({
-                message: "User Not Found"
+                message: "Record Not Found"
             })
         }
 
