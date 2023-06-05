@@ -3,6 +3,7 @@ import { User } from "../entities/User"
 import { AppDataSource } from "../../data-source"
 import { UserService } from "../services/UserService"
 import { CreateUserDto } from "../dtos/CreateUserDto"
+import { UpdateUserDto } from "../dtos/UpdateUserDto"
 
 export class UserController {
 
@@ -35,6 +36,13 @@ export class UserController {
         const id = parseInt(request.params.id)
 
         return await this.userService.delete(id)
+    }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        const id = parseInt(request.params.id)
+        const userDto: UpdateUserDto = request.body
+
+        return await this.userService.update(id, userDto)
     }
 
 }

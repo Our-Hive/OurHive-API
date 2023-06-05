@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source"
 import { CreateUserDto } from "../dtos/CreateUserDto"
+import { UpdateUserDto } from "../dtos/UpdateUserDto"
 import { User } from "../entities/User"
 
 export class UserService {
@@ -31,5 +32,13 @@ export class UserService {
         const user: User = await this.one(id)
 
         return await this.userRepository.remove(user)
+    }
+
+    async update(id: number, updateDto: UpdateUserDto) {
+        const user: User = await this.one(id)
+
+        const updateUser = Object.assign(user, updateDto)
+
+        return await this.userRepository.save(updateUser)
     }
 }
